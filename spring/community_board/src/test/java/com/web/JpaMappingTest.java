@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.is;
 public class JpaMappingTest {
     private final String boardTestTitle = "테스트";
     private final String email = "test@gmail.com";
+    private final String password = "test";
 
     @Autowired
     UserRepository userRepository;
@@ -34,7 +35,7 @@ public class JpaMappingTest {
     public void init() {
         User user = userRepository.save(User.builder()
                 .name("havi")
-                .password("test")
+                .password(password)
                 .email(email)
                 .createdDate(LocalDateTime.now())
                 .build());
@@ -51,15 +52,17 @@ public class JpaMappingTest {
 
     @Test
     public void is_generated_test() {
-        User user = userRepository.findByEmail(email);
+
+        //User user = userRepository.findByEmail(email);
+        User user = userRepository.findByPassword(password);
 
         assertThat(user.getName(), is("havi"));
-        assertThat(user.getPassword(), is("test"));
+        assertThat(user.getPassword(), is("man"));
         assertThat(user.getEmail(), is(email));
 
         Board board = boardRepository.findByUser(user);
         assertThat(board.getTitle(), is(boardTestTitle));
-        assertThat(board.getSubTtile(), is("서브 타이틀"));
+        assertThat(board.getSubTitle(), is("서브 타이틀"));
         assertThat(board.getContent(),  is("콘텐츠"));
         assertThat(board.getBoardType(), is(BoardType.free));
     }

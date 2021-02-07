@@ -24,7 +24,7 @@ public class Board implements Serializable {
     private String title;
 
     @Column
-    private String subTtile;
+    private String subTitle;
 
     @Column
     private String content;
@@ -47,7 +47,7 @@ public class Board implements Serializable {
                  LocalDateTime createdDate, LocalDateTime updatedDate, User user) {
 
         this.title       = title;
-        this.subTtile    = subTitle;
+        this.subTitle    = subTitle;
         this.content     = content;
         this.boardType   = boardType;
         this.createdDate = createdDate;
